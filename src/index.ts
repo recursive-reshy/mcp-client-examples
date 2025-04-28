@@ -1,3 +1,5 @@
+import path from 'path'
+
 // MCP client SDK
 import { Client } from '@modelcontextprotocol/sdk/client/index.js'
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
@@ -16,48 +18,53 @@ const main = async () => {
 
   try {
     // 2. Connect to server
-    console.log('Connecting to server...')
+    console.log('Connecting to server...')    
     await McpClient.connect( 
       new StdioClientTransport(
-        { command: './index.js', args: [] }
+        // { command: 'node', args: ['build/index.js'] }
+        // { command: 'node', args: [ path.resolve( 'C:/Users/reshs/OneDrive/Documents/GitHub/mcp-server-examples/build/index.js' ) ] }
+        { command: 'node', args: [ 'C:/Users/reshs/OneDrive/Documents/GitHub/mcp-server-examples/build/index.js' ] }
       ) 
     )
 
-  // List prompts
-  const prompts = await McpClient.listPrompts()
+    console.log('Connected to server')
+    
+    // List prompts
+    // const prompts = await McpClient.listPrompts()
 
-  // Get a prompt // Uncomment if server has  prompts
-  // const prompt = await McpClient.getPrompt( {
-  //   name: "example-prompt",
-  //   arguments: {
-  //     arg1: "value"
-  //   }
-  // } )
+    // Get a prompt // Uncomment if server has  prompts
+    // const prompt = await McpClient.getPrompt( {
+    //   name: "example-prompt",
+    //   arguments: {
+    //     arg1: "value"
+    //   }
+    // } )
 
-  // List resources
-  const resources = await McpClient.listResources()
+    // // List resources
+    // const resources = await McpClient.listResources()
 
-  // // Read a resource // Uncomment if server has resources
-  // const resource = await McpClient.readResource({
-  //   uri: 'file:///example.txt'
-  // } )
+    // // // Read a resource // Uncomment if server has resources
+    // // const resource = await McpClient.readResource({
+    // //   uri: 'file:///example.txt'
+    // // } )
 
-  // List tools
-  const tools = await McpClient.listTools()
+    // List tools
+    const tools = await McpClient.listTools()
+    console.log( 'Available tools:', tools.tools.map( tool => tool.name ) )
 
-  // Call a tool
-  const result = await McpClient.callTool( {
-    name: 'example-tool',
-    arguments: {
-      arg1: 'value'
-    }
-  } )
+    // // Call a tool
+    // const result = await McpClient.callTool( {
+    //   name: 'example-tool',
+    //   arguments: {
+    //     arg1: 'value'
+    //   }
+    // } )
     // Close the connection
     await McpClient.close();
     console.log('Connection closed');
   }
     catch (error) {
-    console.error('Unhandled error in main', error)
+    console.error('Unhandled error in main ->', error)
   }
 }
 
