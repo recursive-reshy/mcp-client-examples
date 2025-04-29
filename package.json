@@ -1,8 +1,8 @@
-{ "name": "mcp-client-examples", 
-  "version": "0.1.0", 
-  "license": "ISC", 
-  "author": "Naresh Sabapathy", 
-  "description": "MCP client examples", 
+{ "name": "mcp-client-examples",
+  "version": "0.1.0",
+  "license": "ISC",
+  "author": "Naresh Sabapathy",
+  "description": "MCP client examples",
   "keywords": ["MCP"],
   "type": "module",
   "main": "index.js",
@@ -11,12 +11,13 @@
     "start": "node build/index.js",
     "dev": "tsc --watch & node --watch build/index.js"
   },
-  "dependencies": { 
-    "@modelcontextprotocol/sdk":"^1.10.2",
-    "zod":"^3.24.3"
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.10.2",
+    "openai": "^4.96.0",
+    "zod": "^3.24.3"
   },
-  "devDependencies": { 
-    "@types/node":"^22.15.1",
-    "typescript":"^5.8.3"
+  "devDependencies": {
+    "@types/node": "^22.15.1",
+    "typescript": "^5.8.3"
   }
 }
