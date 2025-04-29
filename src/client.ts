@@ -3,7 +3,7 @@ import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
 
 const transport = new StdioClientTransport( {
   command: process.env.MCP_SERVER_COMMAND || 'node',
-  args: process.env.MCP_SERVER_ARGS || [''],
+  args: process.env.MCP_SERVER_ARGS ? process.env.MCP_SERVER_ARGS.split(' ') : undefined,
 } )
 
 const McpClient = new Client( 
