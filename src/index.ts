@@ -4,6 +4,11 @@ import path from 'path'
 import { Client } from '@modelcontextprotocol/sdk/client/index.js'
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
 
+if( process.argv.length < 3 ) {
+  console.error('Usage: node build/index.js "Your prompt here"')
+  process.exit(1)
+}
+
 const main = async () => {
   // 1. Create a new MCP client
   const McpClient = new Client(
@@ -21,8 +26,7 @@ const main = async () => {
     console.log('Connecting to server...')    
     await McpClient.connect( 
       new StdioClientTransport(
-        // { command: 'node', args: ['build/index.js'] }
-        // { command: 'node', args: [ path.resolve( 'C:/Users/reshs/OneDrive/Documents/GitHub/mcp-server-examples/build/index.js' ) ] }
+        // TODO: Need to use node path package to get the absolute path
         { command: 'node', args: [ 'C:/Users/reshs/OneDrive/Documents/GitHub/mcp-server-examples/build/index.js' ] }
       ) 
     )
