@@ -57,13 +57,47 @@ const openAiAgentLoop = async (
   }
 }
 
+// Define an asynchronous main function to orchestrate the agent's behavior
 const main = async () => {
+  // Initialize a new MessageHandler instance to manage the conversation history
   const messagesHandler = new MessageHandler()
 
+  // Create an instance of the OpenAI client using the API key from environment variables
   const LLM = new OpenAI( { apiKey: process.env.OPENAI_API_KEY } )
 
+  // Retrieve the list of available tools from the MCP client
   const mcpToolsList = await McpClient.listTools()
-  
+
+  // Convert the MCP tools list into a format compatible with OpenAI's tool schema
   const openAiTools = mapToolsListToOpenAiTools(mcpToolsList)
 
+  try {
+    // Start an infinite loop to continuously interact with the user
+    while (true) {
+      // Prompt the user for input
+      const input = askForInput()
+
+      // Check if the user input is the command to terminate the session
+      if (input == 'text') {
+        // Store the current conversation messages before exiting
+        messagesHandler.storeMessages()
+        break // Exit the loop
+      }
+
+      // Add the user's input as a new message in the conversation history
+      messagesHandler.addMessage({
+        role: 'user',
+        content: input || '', // Ensure content is a string default to empty if input is null
+      })
+
+      // Invoke the agent loop to process the conversation with the current input and tools
+      await openAiAgentLoop( LLM, openAiTools, messagesHandler )
+    }
+  } catch (error) {
+    console.error(`Unhandled error in main: ${error}`)
+  } finally {
+    McpClient.close()
+  }
 }
+
+await main()
