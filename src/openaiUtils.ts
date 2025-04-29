@@ -11,15 +11,15 @@ type OpenAiToolsInputType = {
   type: 'function'
   function: {
     name: string
-    description: string
-    parameters: Record<string, any> // JSON Schema
+    description?: string
+    parameters: Record< string, any > // JSON Schema
   }
 }
 
 export type ToolsListServerResponseType = {
   tools: {
     name: string
-    description: string
+    description?: string
     inputSchema: Record<string, any> // JSON Schema
   }[]
 }
@@ -30,7 +30,19 @@ export type ToolsListServerResponseType = {
  * @returns
  */
 export const mapToolsListToOpenAiTools = ( toolList: ToolsListServerResponseType ): OpenAiToolsInputType[] => 
-  toolList.tools.map( ( { name, description, inputSchema: parameters } ) => ( { type: 'function', function: { name, description, parameters } } ) )
+  toolList.tools.map( ( 
+    { name,
+      description,
+      inputSchema: parameters 
+    } ) => ( 
+      { type: 'function',
+        function: { 
+          name,
+          description,
+          parameters 
+        } 
+      } 
+  ) )
 
 /**
  * Applies the tool call(s) if they exists in the response and returns the result as a message to append
