@@ -12,7 +12,9 @@ const colorByRole = {
 }
 
 export const printMessage = ( 
-  message: OpenAI.Chat.Completions.ChatCompletionMessageParam | OpenAI.Chat.Completions.ChatCompletionMessage,
+  message: 
+   | OpenAI.Chat.Completions.ChatCompletionMessageParam
+   | OpenAI.Chat.Completions.ChatCompletionMessage,
   debug: boolean = false
 ) => {
   if( ( message.role == 'system' || message.role == 'tool') && !debug ) return

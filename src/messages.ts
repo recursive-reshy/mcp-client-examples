@@ -7,8 +7,8 @@ import { printMessage } from './cli.js'
 import { initialMessageSystemPrompt, performNextStepSystemPrompt } from './prompts.js'
 
 export type MessageType = 
-  OpenAI.Chat.Completions.ChatCompletionMessageParam |
-  OpenAI.Chat.Completions.ChatCompletionMessage
+ | OpenAI.Chat.Completions.ChatCompletionMessageParam
+ | OpenAI.Chat.Completions.ChatCompletionMessage
 
 class MessageHandler {
   private messages: MessageType[] = [ initialMessageSystemPrompt ]
