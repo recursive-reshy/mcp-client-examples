@@ -1,3 +1,4 @@
+// TODO: Move to client.ts
 import { Client } from '@modelcontextprotocol/sdk/client/index.js'
 
 const callTool = async (
