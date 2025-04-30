@@ -2,6 +2,10 @@ import OpenAI from 'openai'
 
 import process from 'process'
 
+// We need this package is not a node object and is only available in the browser
+// See line 51
+import psp from 'prompt-sync-plus'
+
 const colorByRole = {
   system: 'green',
   user: 'blue',
@@ -43,6 +47,7 @@ export const printMessage = (
 
 export const askForInput = () => {
   console.log( '%cuser', `color: blue; font-weight: bold;` )
+  const prompt = psp(undefined)
   const result = prompt('>')
 
   // Delete the prompt lines, will be replaced by printMessage
