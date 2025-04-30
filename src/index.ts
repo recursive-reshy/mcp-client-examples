@@ -78,7 +78,7 @@ const main = async () => {
       const input = askForInput()
 
       // Check if the user input is the command to terminate the session
-      if (input == 'text') {
+      if ( input == 'quit' ) {
         // Store the current conversation messages before exiting
         messagesHandler.storeMessages()
         break // Exit the loop
