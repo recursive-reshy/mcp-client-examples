@@ -10,6 +10,7 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
+messages.json
 
 # Coverage directory used by tools like istanbul
 coverage/
@@ -46,6 +47,9 @@ jspm_packages/
 .env.test.local
 .env.production.local
 .env.local
+credentials/
+.gdrive-server-credentials.json
+gcp-oauth.keys.json
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
